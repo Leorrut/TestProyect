@@ -7,9 +7,9 @@ public class Icons : MonoBehaviour
     
     void Start()
     {
-        LeanTween.scale(gameObject, new Vector3(1f, 1f, 1f), 0.2f).setDelay(0.4f).setEase(LeanTweenType.easeInOutElastic);
+        LeanTween.scale(gameObject, new Vector3(1f, 1f, 0.5f), 0.5f);
 
-        LeanTween.scale(gameObject, new Vector3(0f, 0f, 0f),0.5f).setDelay(2f).setEase(LeanTweenType.easeInOutElastic);
+        LeanTween.scale(gameObject, new Vector3(0f, 0f, 0f),1f).setDelay(0.5f).setEase(LeanTweenType.easeInOutElastic);
         StartCoroutine(inactive());
     }
 

@@ -14,4 +14,5 @@ public class CollisionDetector : MonoBehaviour
     {
         playerController.isGrounded = true;
     }
+
 }

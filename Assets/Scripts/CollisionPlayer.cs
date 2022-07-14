@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CollisionPlayer : MonoBehaviour
 {
+    public Joystick joy;
     public GameObject canvas;
     public GameObject canvasMenu;
     public GameObject canvasMenuButton;
@@ -16,6 +17,7 @@ public class CollisionPlayer : MonoBehaviour
     private int actualLevel;
     private Animator transition;
     public PathOfVision enemy;
+    public GameObject enemygame;
 
     void Start()
     {
@@ -56,6 +58,7 @@ public class CollisionPlayer : MonoBehaviour
                     Debug.Log(actualLevel);
                     
                     StartCoroutine(FloorPlayerEnd(0.1f));
+                    joy.gameObject.SetActive(false);
                     canvasFade.SetActive(true);
                     transition.SetTrigger("Transition");
                     LeanTween.scale(canvasMenu,new Vector3(1.5f, 1.5f, 1.5f),2f).setDelay(.5f).setEase(LeanTweenType.easeInOutElastic);
@@ -71,17 +74,19 @@ public class CollisionPlayer : MonoBehaviour
         {
 
             Instantiate(player,transform.position, transform.rotation);
-
+           
             Destroy(GetComponent<ConfigurableJoint>());
             StartCoroutine(FloorPlayerEnd(0.1f));
+            
         }
         if (collision.gameObject.tag == "Enemy")
         {
             camActive.SetActive(false);
             Instantiate(player, transform.position, transform.rotation);
-
+            canvasFade.SetActive(true);
+            canvas.SetActive(true);
             Destroy(GetComponent<ConfigurableJoint>());
-            StartCoroutine(EnemyPlayerEnd(0.1f));
+           
         }
     }
 
@@ -89,28 +94,25 @@ public class CollisionPlayer : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         canvas.SetActive(true);
-        Debug.Log("perdiste");
-        enemy.folowVelocity = 0;
+       // Debug.Log("perdiste");
+  
        // Time.timeScale = 0;
         LeanTween.scale(canvasMenu, new Vector3(1f, 1f, 1f), 1f).setDelay(.2f).setEase(LeanTweenType.easeInOutElastic);
         LeanTween.scale(canvasMenuButton, new Vector3(1f, 1f, 1f), 1.5f).setDelay(.5f).setEase(LeanTweenType.easeInOutElastic);
+ 
+        
+        Object.Destroy(enemygame);
     }
 
-    IEnumerator EnemyPlayerEnd(float time)
-    {
-        yield return new WaitForSeconds(0.5f);
-        canvas.SetActive(true);
-       
-        Debug.Log("perdiste");
-        Time.timeScale = 0;
 
-    }
-
-    IEnumerator LoadScene(float time)
+    IEnumerator Meta()
     {
 
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(1);
+        yield return new WaitForSeconds(2f);
+        
+        transition.SetTrigger("Transition");
+        SceneManager.LoadScene(0);
+
     }
 
 }

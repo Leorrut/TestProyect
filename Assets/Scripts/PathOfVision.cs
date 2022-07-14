@@ -15,6 +15,7 @@ public class PathOfVision : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstacleMask;
 
+
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
 
@@ -24,6 +25,7 @@ public class PathOfVision : MonoBehaviour
 
 
     public MeshFilter viewMeshFilter;
+   // public MeshFilter targetMaskActive;
     Mesh viewMesh;
 
     void Start()
@@ -67,14 +69,10 @@ public class PathOfVision : MonoBehaviour
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
-                    Debug.Log("detected");
+                  //  Debug.Log("detected");
 
                     //follow player
                     detected = true;
-                    //  Vector3 playerPositionXZ = new Vector3(player.position.x, transform.position.y, player.position.z);
-
-                    //transform.LookAt(playerPositionXZ);
-                    // transform.position = Vector3.MoveTowards(transform.position, playerPositionXZ, folowVelocity * Time.deltaTime);
 
                 }
 

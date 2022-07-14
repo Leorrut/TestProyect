@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         hips = GetComponent<Rigidbody>();
-        joy = Joystick.FindObjectOfType<DynamicJoystick> ();
+        joy = Joystick.FindObjectOfType<VariableJoystick> ();
     }
 
    
