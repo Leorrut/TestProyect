@@ -95,7 +95,7 @@ public class CollisionPlayer : MonoBehaviour
         LeanTween.scale(canvasMenu, new Vector3(1f, 1f, 1f), 1f).setDelay(.2f).setEase(LeanTweenType.easeInOutElastic);
         LeanTween.scale(canvasMenuButton, new Vector3(1f, 1f, 1f), 1.5f).setDelay(.5f).setEase(LeanTweenType.easeInOutElastic);
         LeanTween.scale(CanvasTextLevel, new Vector3(2f, 2f, 2f), 1.0f).setDelay(.8f).setEase(LeanTweenType.easeInOutElastic);
-        LeanTween.scale(star, new Vector3(7f, 7f, 7f), 1f).setDelay(.4f).setEase(LeanTweenType.easeInOutElastic);
+        LeanTween.scale(star, new Vector3(0.2f, 0.2f, 0f), 1f).setDelay(.4f).setEase(LeanTweenType.easeInOutElastic);
 
     }
 

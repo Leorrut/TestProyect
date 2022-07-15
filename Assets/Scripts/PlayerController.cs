@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         hips = GetComponent<Rigidbody>();
-        joy = Joystick.FindObjectOfType<VariableJoystick> ();
+        joy = Joystick.FindObjectOfType<FixedJoystick> ();
     }
 
    
@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 directions = Vector3.forward * joy.Vertical + Vector3.right * joy.Horizontal;
 
-        hips.transform.Translate(directions * speed * Time.deltaTime);
+
+        hips.AddForce(directions * speed * Time.deltaTime, ForceMode.Impulse);
 
 
 
