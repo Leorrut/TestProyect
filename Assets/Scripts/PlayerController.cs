@@ -24,13 +24,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 directions = Vector3.forward * joy.Vertical + Vector3.right * joy.Horizontal;
-   
 
-         hips.AddForce(directions * speed * Time.deltaTime, ForceMode.Impulse);
+        hips.transform.Translate(directions * speed * Time.deltaTime);
+
 
 
         if (isGrounded)
             {
+        
             referencex = transform.position.x;
             referencez = transform.position.z;
             if(referencex != directions.x && referencez != directions.y)

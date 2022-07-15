@@ -90,8 +90,9 @@ public class EnemyMove : MonoBehaviour
                     enemyType = 1;
 
                     NavMeshAgent agente = GetComponent<NavMeshAgent>();
-                    agente.destination = downObject;
-                    transform.position = Vector3.MoveTowards(transform.position, downObject, pathvision.folowVelocity * Time.deltaTime);
+                    agente.destination = ObjectDown.position;
+                   // agente.destination = ObjectDown.position;
+                    //  transform.position = Vector3.MoveTowards(transform.position, downObject, pathvision.folowVelocity * Time.deltaTime);
                     alerta = false;
                     break;
                 case 3:
@@ -135,13 +136,13 @@ public class EnemyMove : MonoBehaviour
             switch (waypointNumber)
             {
                 case 4:
-                    LeanTween.rotateY(this.gameObject, 180, 2);
+                    LeanTween.rotateY(this.gameObject, 180, 2.5f).setDelay(1);
                     waypointNumber++;
                     StartCoroutine(MoveAgain());
                     speed = 0;
                     break;
                 case 3:
-                    LeanTween.rotateY(this.gameObject, 0, 2);
+                    LeanTween.rotateY(this.gameObject, 0, 2.5f).setDelay(1);
                     waypointNumber++;
                     StartCoroutine(MoveAgain());
                     speed = 0;
@@ -150,13 +151,13 @@ public class EnemyMove : MonoBehaviour
                  
                     break;
                 case 1:
-                    LeanTween.rotateY(this.gameObject, -90, 2);
+                    LeanTween.rotateY(this.gameObject, -90, 2.5f).setDelay(1);
                     waypointNumber++;
                     StartCoroutine(MoveAgain());
                     speed = 0;
                     break;
                 case 0:
-                    LeanTween.rotateY(this.gameObject, 90, 2);
+                    LeanTween.rotateY(this.gameObject, -270, 2.5f).setDelay(1);
                     waypointNumber++;
                     speed = 0;
                     StartCoroutine(MoveAgain());
@@ -209,7 +210,7 @@ public class EnemyMove : MonoBehaviour
     IEnumerator MoveAgain()
     {
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3.5f);
        
         speed = 3f;
  

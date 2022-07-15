@@ -21,21 +21,21 @@ public class Floorefect : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             FloorEffect.Play();
+            //enemyMove.downObject = this.transform.position;
             //range.transform.gameObject.tag = "Sound";
             StartCoroutine(CollisionEnd());
             range.transform.position = new Vector3(0, 2, 0);
-            enemyMove.ObjectDown = this.transform;
         }
 
     }
 
     IEnumerator CollisionEnd()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
+        enemyMove.ObjectDown = gameObject.transform;
         range.transform.position = new Vector3(0, 10, 0);
-        
         FloorEffect.Stop();
-        Debug.Log(enemyMove.ObjectDown);
+   
 
 
     }
