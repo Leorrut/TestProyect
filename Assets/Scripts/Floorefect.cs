@@ -7,6 +7,7 @@ public class Floorefect : MonoBehaviour
    
     private EnemyMove enemyMove;
     public ParticleSystem FloorEffect;
+    public GameObject range;
 
     void Start()
     {
@@ -14,21 +15,28 @@ public class Floorefect : MonoBehaviour
       
     }
 
-    
-    void Update()
-    {
-        
-    }
     private void OnCollisionEnter(Collision collision)
     {
 
         if (collision.gameObject.tag == "Floor")
         {
-            enemyMove.ObjectDown = this.transform;
             FloorEffect.Play();
-            transform.gameObject.tag = "Sound";
-            enemyMove.alerta = true;
-            transform.gameObject.tag = "Untagged";
+            //range.transform.gameObject.tag = "Sound";
+            StartCoroutine(CollisionEnd());
+            range.transform.position = new Vector3(0, 2, 0);
+            enemyMove.ObjectDown = this.transform;
         }
+
+    }
+
+    IEnumerator CollisionEnd()
+    {
+        yield return new WaitForSeconds(0.3f);
+        range.transform.position = new Vector3(0, 10, 0);
+        
+        FloorEffect.Stop();
+        Debug.Log(enemyMove.ObjectDown);
+
+
     }
 }

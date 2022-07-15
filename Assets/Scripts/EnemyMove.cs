@@ -8,7 +8,7 @@ public class EnemyMove : MonoBehaviour
     private float speed = 3f;
 
     public int enemyType;
-    private PathOfVision pathvision;
+    public PathOfVision pathvision;
     public WayPoint waypoint;
     public Vector3 downObject;
     public GameObject rangeofvision;
@@ -21,7 +21,7 @@ public class EnemyMove : MonoBehaviour
     void Start()
     {
         NavMeshAgent agente = GetComponent<NavMeshAgent>();
-        pathvision = FindObjectOfType<PathOfVision>();
+       // pathvision = FindObjectOfType<PathOfVision>();
         waypoint = FindObjectOfType<WayPoint>();
         transform.LookAt(new Vector3(waypointTarget.position.x, transform.position.y, waypointTarget.position.z));
      
@@ -90,8 +90,8 @@ public class EnemyMove : MonoBehaviour
                     enemyType = 1;
 
                     NavMeshAgent agente = GetComponent<NavMeshAgent>();
-                    agente.destination = ObjectDown.transform.position;
-                    transform.position = Vector3.MoveTowards(transform.position, ObjectDown.transform.position, pathvision.folowVelocity * Time.deltaTime);
+                    agente.destination = downObject;
+                    transform.position = Vector3.MoveTowards(transform.position, downObject, pathvision.folowVelocity * Time.deltaTime);
                     alerta = false;
                     break;
                 case 3:
@@ -111,8 +111,8 @@ public class EnemyMove : MonoBehaviour
         }
         if (alerta == true)
         {
-            enemyType = 4;
-            icon.SetActive(true);
+            //enemyType = 4;
+            //icon.SetActive(true);
         }
     }
 
@@ -135,22 +135,19 @@ public class EnemyMove : MonoBehaviour
             switch (waypointNumber)
             {
                 case 4:
-                    if (downObject.x<this.transform.position.x)
-                    {
-                        LeanTween.rotateY(this.gameObject, 90, 2);
-
-                    }
-                    else
-                    {
-                        LeanTween.rotateY(this.gameObject, -90, 2);
-                    }
-                   
+                    LeanTween.rotateY(this.gameObject, 180, 2);
+                    waypointNumber++;
+                    StartCoroutine(MoveAgain());
+                    speed = 0;
                     break;
                 case 3:
-                    LeanTween.rotateY(this.gameObject, -90, 2);
+                    LeanTween.rotateY(this.gameObject, 0, 2);
+                    waypointNumber++;
+                    StartCoroutine(MoveAgain());
+                    speed = 0;
                     break;
                 case 2:
-
+                 
                     break;
                 case 1:
                     LeanTween.rotateY(this.gameObject, -90, 2);
@@ -181,14 +178,31 @@ public class EnemyMove : MonoBehaviour
     IEnumerator EnemyPlayerEnd(float time)
     {
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(waypointNumber ==2)
+        switch (waypointNumber)
         {
-            waypointNumber = 0;
+            case 5:
+                waypointNumber = 3;
+                break;
+            case 4:
+                
+                break;
+            case 3:
+
+                break;
+            case 2:
+                waypointNumber = 0;
+                break;
+            case 1:
+
+                break;
+            case 0:
+
+                break;
         }
     }
 
